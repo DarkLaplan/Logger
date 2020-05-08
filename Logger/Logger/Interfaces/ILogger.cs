@@ -54,5 +54,11 @@ namespace Logger.Interfaces
         /// </summary>
         /// <param name="exception">Exception to be log.</param>
         public void LogFatal(Exception exception);
+
+        /// <summary>
+        /// Logs message from successful operation.
+        /// </summary>
+        /// <param name="message">Text as string variable</param>
+        public void LogSuccessful(string message);
     }
 }

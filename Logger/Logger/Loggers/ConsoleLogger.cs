@@ -9,6 +9,11 @@ namespace Logger.Loggers
     public class ConsoleLogger : ILogger
     {
         /// <summary>
+        /// Gets color for successful message.
+        /// </summary>
+        public ConsoleColor SuccessfulColor { get; private set; } = ConsoleColor.DarkGreen;
+
+        /// <summary>
         /// Gets color for info message.
         /// </summary>
         public ConsoleColor InfoColor { get; private set; } = ConsoleColor.Cyan;
@@ -43,9 +48,9 @@ namespace Logger.Loggers
         /// <param name="errorColor">Color for error.</param>
         /// <param name="warningColor">Color for warning.</param>
         /// <param name="fatalColor">Color for fatal problem.</param>
-        public ConsoleLogger(ConsoleColor infoColor, ConsoleColor errorColor, ConsoleColor warningColor, ConsoleColor fatalColor)
+        public ConsoleLogger(ConsoleColor infoColor, ConsoleColor errorColor, ConsoleColor warningColor, ConsoleColor fatalColor, ConsoleColor successfulColor)
         {
-            ChangeColors(infoColor, errorColor, warningColor, fatalColor);
+            ChangeColors(infoColor, errorColor, warningColor, fatalColor, successfulColor);
         }
 
         /// <summary>
@@ -55,12 +60,13 @@ namespace Logger.Loggers
         /// <param name="errorColor">Color for error.</param>
         /// <param name="warningColor">Color for warning.</param>
         /// <param name="fatalColor">Color for fatal problem.</param>
-        public void ChangeColors(ConsoleColor infoColor, ConsoleColor errorColor, ConsoleColor warningColor, ConsoleColor fatalColor)
+        public void ChangeColors(ConsoleColor infoColor, ConsoleColor errorColor, ConsoleColor warningColor, ConsoleColor fatalColor, ConsoleColor successfulColor)
         {
             InfoColor = infoColor;
             ErrorColor = errorColor;
             WarningColor = warningColor;
             FatalColor = fatalColor;
+            SuccessfulColor = successfulColor;
         }
 
         /// <summary>
@@ -121,6 +127,11 @@ namespace Logger.Loggers
         public void LogWarning(Exception exception)
         {
             LogMessageToConsole(exception.Message, WarningColor);
+        }
+
+        public void LogSuccessful(string message)
+        {
+            LogMessageToConsole(message, SuccessfulColor);
         }
     }
 }
